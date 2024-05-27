@@ -9,21 +9,25 @@ const toLocaleDateStringFactory =
     const key = date.toString();
     let lds = localeDateStringCache[key];
     if (!lds) {
-      lds = date.toLocaleDateString(locale, dateTimeOptions);
+      lds = date.toLocaleDateString(locale, dateTimeOptions).replace(/[/]/g, '-');
       localeDateStringCache[key] = lds;
     }
     return lds;
   };
 const dateTimeOptions: Intl.DateTimeFormatOptions = {
-  weekday: "short",
-  year: "numeric",
-  month: "long",
-  day: "numeric",
+  // weekday: "short",
+  // year: "numeric",
+  // month: "long",
+  // day: "numeric",
+  year: 'numeric',
+  month: '2-digit',
+  day: '2-digit',
 };
 
 export const TaskListTableDefault: React.FC<{
   rowHeight: number;
   rowWidth: string;
+  taskWidth: number;
   fontFamily: string;
   fontSize: string;
   locale: string;
@@ -34,6 +38,7 @@ export const TaskListTableDefault: React.FC<{
 }> = ({
   rowHeight,
   rowWidth,
+  taskWidth,
   tasks,
   fontFamily,
   fontSize,
@@ -70,8 +75,8 @@ export const TaskListTableDefault: React.FC<{
             <div
               className={styles.taskListCell}
               style={{
-                minWidth: rowWidth,
-                maxWidth: rowWidth,
+                minWidth: taskWidth,
+                maxWidth: taskWidth,
               }}
               title={t.name}
             >

@@ -6,6 +6,7 @@ export const convertToBarTasks = (
   tasks: Task[],
   dates: Date[],
   columnWidth: number,
+  taskWidth: number,
   rowHeight: number,
   taskHeight: number,
   barCornerRadius: number,
@@ -28,6 +29,7 @@ export const convertToBarTasks = (
       i,
       dates,
       columnWidth,
+      taskWidth,
       rowHeight,
       taskHeight,
       barCornerRadius,
@@ -66,6 +68,7 @@ const convertToBarTask = (
   index: number,
   dates: Date[],
   columnWidth: number,
+  taskWidth: number,
   rowHeight: number,
   taskHeight: number,
   barCornerRadius: number,
@@ -104,6 +107,7 @@ const convertToBarTask = (
         index,
         dates,
         columnWidth,
+        taskWidth,
         rowHeight,
         taskHeight,
         barCornerRadius,
@@ -121,6 +125,7 @@ const convertToBarTask = (
         index,
         dates,
         columnWidth,
+        taskWidth,
         rowHeight,
         taskHeight,
         barCornerRadius,
@@ -141,6 +146,7 @@ const convertToBar = (
   index: number,
   dates: Date[],
   columnWidth: number,
+  taskWidth: number,
   rowHeight: number,
   taskHeight: number,
   barCornerRadius: number,
@@ -155,9 +161,9 @@ const convertToBar = (
   let x2: number;
   if (rtl) {
     x2 = taskXCoordinateRTL(task.start, dates, columnWidth);
-    x1 = taskXCoordinateRTL(task.end, dates, columnWidth);
+    x1 = taskXCoordinateRTL(task.end, dates, taskWidth);
   } else {
-    x1 = taskXCoordinate(task.start, dates, columnWidth);
+    x1 = taskXCoordinate(task.start, dates, taskWidth);
     x2 = taskXCoordinate(task.end, dates, columnWidth);
   }
   let typeInternal: TaskTypeInternal = task.type;

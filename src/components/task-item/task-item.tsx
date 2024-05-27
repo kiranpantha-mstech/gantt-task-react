@@ -107,7 +107,7 @@ export const TaskItem: React.FC<TaskItemProps> = props => {
         onEventStart("select", task);
       }}
     >
-      {taskItem}
+      {taskItem}x
       <text
         x={getX()}
         y={task.y + taskHeight * 0.5}

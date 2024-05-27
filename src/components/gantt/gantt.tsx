@@ -28,8 +28,9 @@ export const Gantt: React.FunctionComponent<GanttProps> = ({
   tasks,
   headerHeight = 50,
   columnWidth = 60,
+  taskWidth = 150,
   listCellWidth = "155px",
-  rowHeight = 50,
+  rowHeight = 30,
   ganttHeight = 0,
   viewMode = ViewMode.Day,
   preStepsCount = 1,
@@ -125,6 +126,7 @@ export const Gantt: React.FunctionComponent<GanttProps> = ({
         filteredTasks,
         newDates,
         columnWidth,
+        taskWidth,
         rowHeight,
         taskHeight,
         barCornerRadius,
@@ -149,6 +151,7 @@ export const Gantt: React.FunctionComponent<GanttProps> = ({
     rowHeight,
     barCornerRadius,
     columnWidth,
+    taskWidth,
     taskHeight,
     handleWidth,
     barProgressColor,
@@ -434,6 +437,7 @@ export const Gantt: React.FunctionComponent<GanttProps> = ({
   const tableProps: TaskListProps = {
     rowHeight,
     rowWidth: listCellWidth,
+    taskWidth,
     fontFamily,
     fontSize,
     tasks: barTasks,
@@ -449,9 +453,9 @@ export const Gantt: React.FunctionComponent<GanttProps> = ({
     TaskListHeader,
     TaskListTable,
   };
+  console.log(tableProps,"KI");
   return (
     <div>
-      KIRAN
       <div
         className={styles.wrapper}
         onKeyDown={handleKeyDown}
