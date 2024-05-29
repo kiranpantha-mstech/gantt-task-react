@@ -8,6 +8,7 @@ export type TaskListProps = {
   taskWidth: number;
   rightSideElement:any;
   fetchData: () => void;
+  onClickTask: (task_id: string) => void;
   fontFamily: string;
   fontSize: string;
   rowHeight: number;
@@ -38,6 +39,7 @@ export type TaskListProps = {
     selectedTaskId: string;
     rightSideElement:any;
     fetchData: () => void;
+    onClickTask: (task_id: string) => void,
     setSelectedTask: (taskId: string) => void;
     onExpanderClick: (task: Task) => void;
   }>;
@@ -51,6 +53,7 @@ export const TaskList: React.FC<TaskListProps> = ({
   taskWidth,
   rightSideElement,
   fetchData,
+  onClickTask,
   rowHeight,
   scrollY,
   tasks,
@@ -85,6 +88,7 @@ export const TaskList: React.FC<TaskListProps> = ({
     taskWidth,
     rightSideElement,
     fetchData,
+    onClickTask,
     fontFamily,
     fontSize,
     tasks,

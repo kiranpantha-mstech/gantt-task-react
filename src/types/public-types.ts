@@ -90,6 +90,7 @@ export interface StylingOption {
   columnWidth?: number;
   rightSideElement?: any;
   fetchData?: () => void;
+  onClickTask?: (task_id: string) => void;
   taskWidth?: number;
   listCellWidth?: string;
   rowHeight?: number;
@@ -139,6 +140,7 @@ export interface StylingOption {
     selectedTaskId: string;
     rightSideElement: any;
     fetchData: () => void;
+    onClickTask: (task_id: string) => void;
     /**
      * Sets selected task by id
      */

@@ -31,6 +31,7 @@ export const TaskListTableDefault: React.FC<{
   taskWidth: number;
   rightSideElement:any;
   fetchData: () => void;
+  onClickTask: (task_id: string) => void;
   fontFamily: string;
   fontSize: string;
   locale: string;
@@ -44,6 +45,7 @@ export const TaskListTableDefault: React.FC<{
   taskWidth,
   rightSideElement,
   fetchData,
+  onClickTask,
   tasks,
   fontFamily,
   fontSize,
@@ -123,7 +125,7 @@ export const TaskListTableDefault: React.FC<{
                   {expanderSymbol}
                 </div>
                 <div style={{minWidth:taskWidth, maxWidth: taskWidth}}>
-                  {t.name}
+                  <span onClick={()=>{ onClickTask(t.id); }}>{t.name}</span>
                   {!expanderSymbol && <div style={{
                           margin: "0px",
                           position: "absolute",
