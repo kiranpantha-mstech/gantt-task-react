@@ -36,3 +36,11 @@
   padding-left: 1rem;
   user-select: none;
 }
+
+.task-list-hover-area:hover{
+  background-color: #efefefdd !important;
+}
+
+.task-hovered-item:hover{
+  background-color: #efefefdd !important;
+}

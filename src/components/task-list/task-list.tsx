@@ -6,6 +6,8 @@ export type TaskListProps = {
   headerHeight: number;
   rowWidth: string;
   taskWidth: number;
+  rightSideElement:any;
+  fetchData: () => void;
   fontFamily: string;
   fontSize: string;
   rowHeight: number;
@@ -34,6 +36,8 @@ export type TaskListProps = {
     locale: string;
     tasks: Task[];
     selectedTaskId: string;
+    rightSideElement:any;
+    fetchData: () => void;
     setSelectedTask: (taskId: string) => void;
     onExpanderClick: (task: Task) => void;
   }>;
@@ -45,6 +49,8 @@ export const TaskList: React.FC<TaskListProps> = ({
   fontSize,
   rowWidth,
   taskWidth,
+  rightSideElement,
+  fetchData,
   rowHeight,
   scrollY,
   tasks,
@@ -77,6 +83,8 @@ export const TaskList: React.FC<TaskListProps> = ({
     rowHeight,
     rowWidth,
     taskWidth,
+    rightSideElement,
+    fetchData,
     fontFamily,
     fontSize,
     tasks,

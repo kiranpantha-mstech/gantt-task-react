@@ -1,4 +1,4 @@
-import React, { useMemo } from "react";
+import React, { useMemo, useState } from "react";
 import styles from "./task-list-table.module.css";
 import { Task } from "../../types/public-types";
 
@@ -14,6 +14,7 @@ const toLocaleDateStringFactory =
     }
     return lds;
   };
+
 const dateTimeOptions: Intl.DateTimeFormatOptions = {
   // weekday: "short",
   // year: "numeric",
@@ -28,6 +29,8 @@ export const TaskListTableDefault: React.FC<{
   rowHeight: number;
   rowWidth: string;
   taskWidth: number;
+  rightSideElement:any;
+  fetchData: () => void;
   fontFamily: string;
   fontSize: string;
   locale: string;
@@ -39,6 +42,8 @@ export const TaskListTableDefault: React.FC<{
   rowHeight,
   rowWidth,
   taskWidth,
+  rightSideElement,
+  fetchData,
   tasks,
   fontFamily,
   fontSize,
@@ -49,6 +54,29 @@ export const TaskListTableDefault: React.FC<{
     () => toLocaleDateStringFactory(locale),
     [locale]
   );
+
+  const [hoveredTasks, setHoveredTasks] = useState({});
+
+  // Function to handle hover enter for a specific task
+  const handleMouseEnter = (taskId:string) => {
+    setHoveredTasks((prevState) => ({
+      ...prevState,
+      [taskId]: true,
+    }));
+  };
+
+  // Function to handle hover leave for a specific task
+  const handleMouseLeave = (taskId:string) => {
+    setHoveredTasks((prevState) => ({
+      ...prevState,
+      [taskId]: false,
+    }));
+  };
+
+  const updateTimer = (taskId:string) => {
+    const updatedElement = React.cloneElement(rightSideElement, {'taskId':taskId, 'fetchData':fetchData})
+    return updatedElement;
+  };
 
   return (
     <div
@@ -77,8 +105,11 @@ export const TaskListTableDefault: React.FC<{
               style={{
                 minWidth: taskWidth,
                 maxWidth: taskWidth,
+                position:'relative',
               }}
               title={t.name}
+              onMouseEnter={() => handleMouseEnter(t.id)}
+              onMouseLeave={() => handleMouseLeave(t.id)}  
             >
               <div className={styles.taskListNameWrapper}>
                 <div
@@ -91,7 +122,25 @@ export const TaskListTableDefault: React.FC<{
                 >
                   {expanderSymbol}
                 </div>
-                <div>{t.name}</div>
+                <div style={{minWidth:taskWidth, maxWidth: taskWidth}}>
+                  {t.name}
+                  {!expanderSymbol && <div style={{
+                          margin: "0px",
+                          position: "absolute",
+                          width: "40%",
+                          right: "0px",
+                          color: "black",
+                          backgroundColor: (hoveredTasks[t.id]) ?"#efefef":"",
+                          opacity: (hoveredTasks[t.id]) ? 1 : 0,
+                          top: 0,
+                          height: "100%",
+                          display: "flex",
+                          alignItems: "center",
+                          paddingLeft: "5px",
+                        }}>
+                          &nbsp;{updateTimer(t.id)}
+                  </div>}
+                </div>
               </div>
             </div>
             <div

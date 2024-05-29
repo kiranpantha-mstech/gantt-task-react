@@ -88,6 +88,8 @@ export interface DisplayOption {
 export interface StylingOption {
   headerHeight?: number;
   columnWidth?: number;
+  rightSideElement?: any;
+  fetchData?: () => void;
   taskWidth?: number;
   listCellWidth?: string;
   rowHeight?: number;
@@ -135,6 +137,8 @@ export interface StylingOption {
     locale: string;
     tasks: Task[];
     selectedTaskId: string;
+    rightSideElement: any;
+    fetchData: () => void;
     /**
      * Sets selected task by id
      */
