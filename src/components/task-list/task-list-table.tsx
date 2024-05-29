@@ -108,6 +108,7 @@ export const TaskListTableDefault: React.FC<{
                 minWidth: taskWidth,
                 maxWidth: taskWidth,
                 position:'relative',
+                backgroundColor: (hoveredTasks[t.id]) ?"#efefef":"",
               }}
               title={t.name}
               onMouseEnter={() => handleMouseEnter(t.id)}
@@ -129,7 +130,7 @@ export const TaskListTableDefault: React.FC<{
                   {!expanderSymbol && <div style={{
                           margin: "0px",
                           position: "absolute",
-                          width: "40%",
+                          width: "50%",
                           right: "0px",
                           color: "black",
                           backgroundColor: (hoveredTasks[t.id]) ?"#efefef":"",
