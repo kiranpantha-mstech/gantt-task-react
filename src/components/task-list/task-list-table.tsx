@@ -15,6 +15,19 @@ const toLocaleDateStringFactory =
     return lds;
   };
 
+  const calculateTimeDifference = (startDate:any, endDate:any, unit = 'days') => {
+    const diffInMs = endDate - startDate;
+  
+    if (unit === 'hours') {
+      const diffInHours = Math.floor(diffInMs / 3600000); // Convert milliseconds to hours
+      return `${diffInHours}h`;
+    } else {
+      // Fallback to days
+      const diffInDays = Math.floor(diffInMs / (3600000 * 24)); // Convert milliseconds to days
+      return `${diffInDays}d`;
+    }
+  };
+
 const dateTimeOptions: Intl.DateTimeFormatOptions = {
   // weekday: "short",
   // year: "numeric",
@@ -171,7 +184,7 @@ export const TaskListTableDefault: React.FC<{
                 maxWidth: rowWidth,
               }}
             >
-              &nbsp;{toLocaleDateString(t.end, dateTimeOptions)}
+              &nbsp;{calculateTimeDifference(t.start, t.end)}
             </div>
           </div>
         );

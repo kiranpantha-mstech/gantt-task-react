@@ -70,7 +70,7 @@ export const TaskListHeaderDefault: React.FC<{
             textAlign:'center'
           }}
         >
-          To
+          Duration
         </div>        
       </div>
     </div>
