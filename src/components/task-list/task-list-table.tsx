@@ -71,6 +71,7 @@ export const TaskListTableDefault: React.FC<{
   );
 
   const [hoveredTasks, setHoveredTasks] = useState({});
+  
 
   // Function to handle hover enter for a specific task
   const handleMouseEnter = (taskId:string) => {
@@ -164,6 +165,7 @@ export const TaskListTableDefault: React.FC<{
               style={{
                 minWidth: rowWidth,
                 maxWidth: rowWidth,
+                textAlign:"center"
               }}
             >
               &nbsp;{toLocaleDateString(t.start, dateTimeOptions)}
@@ -173,6 +175,7 @@ export const TaskListTableDefault: React.FC<{
               style={{
                 minWidth: rowWidth,
                 maxWidth: rowWidth,
+                textAlign:"center"
               }}
             >
               &nbsp;{toLocaleDateString(t.end, dateTimeOptions)}
@@ -182,6 +185,7 @@ export const TaskListTableDefault: React.FC<{
               style={{
                 minWidth: rowWidth,
                 maxWidth: rowWidth,
+                textAlign:"center"
               }}
             >
               &nbsp;{calculateTimeDifference(t.start, t.end)}
