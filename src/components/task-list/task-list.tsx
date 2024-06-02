@@ -7,6 +7,9 @@ export type TaskListProps = {
   rowWidth: string;
   taskWidth: number;
   rightSideElement:any;
+  dateTimeStartComponent:any;
+  dateTimeEndComponent:any;
+  isShown:any;
   fetchData: () => void;
   onClickTask: (task_id: string) => void;
   fontFamily: string;
@@ -27,6 +30,7 @@ export type TaskListProps = {
     taskWidth: number;
     fontFamily: string;
     fontSize: string;
+    isShown: any;
   }>;
   TaskListTable: React.FC<{
     rowHeight: number;
@@ -37,7 +41,10 @@ export type TaskListProps = {
     locale: string;
     tasks: Task[];
     selectedTaskId: string;
-    rightSideElement:any;
+    rightSideElement: any;
+    dateTimeStartComponent: any;
+    dateTimeEndComponent: any;
+    isShown:any;
     fetchData: () => void;
     onClickTask: (task_id: string) => void,
     setSelectedTask: (taskId: string) => void;
@@ -52,6 +59,9 @@ export const TaskList: React.FC<TaskListProps> = ({
   rowWidth,
   taskWidth,
   rightSideElement,
+  dateTimeStartComponent,
+  dateTimeEndComponent,
+  isShown,
   fetchData,
   onClickTask,
   rowHeight,
@@ -80,6 +90,7 @@ export const TaskList: React.FC<TaskListProps> = ({
     fontSize,
     rowWidth,
     taskWidth,
+    isShown,
   };
   const selectedTaskId = selectedTask ? selectedTask.id : "";
   const tableProps = {
@@ -87,6 +98,9 @@ export const TaskList: React.FC<TaskListProps> = ({
     rowWidth,
     taskWidth,
     rightSideElement,
+    dateTimeStartComponent,
+    dateTimeEndComponent,
+    isShown,
     fetchData,
     onClickTask,
     fontFamily,

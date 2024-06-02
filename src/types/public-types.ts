@@ -89,6 +89,9 @@ export interface StylingOption {
   headerHeight?: number;
   columnWidth?: number;
   rightSideElement?: any;
+  dateTimeStartComponent?: any,
+  dateTimeEndComponent?: any,
+  isShown?: any,
   fetchData?: () => void;
   onClickTask?: (task_id: string) => void;
   taskWidth?: number;
@@ -128,6 +131,7 @@ export interface StylingOption {
     taskWidth: number;
     fontFamily: string;
     fontSize: string;
+    isShown: any;
   }>;
   TaskListTable?: React.FC<{
     rowHeight: number;
@@ -139,6 +143,9 @@ export interface StylingOption {
     tasks: Task[];
     selectedTaskId: string;
     rightSideElement: any;
+    dateTimeStartComponent: any;
+    dateTimeEndComponent: any;
+    isShown: any;
     fetchData: () => void;
     onClickTask: (task_id: string) => void;
     /**

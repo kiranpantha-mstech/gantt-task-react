@@ -1,19 +1,19 @@
-import React, { useMemo, useState } from "react";
+import React, { useState } from "react";
 import styles from "./task-list-table.module.css";
 import { Task } from "../../types/public-types";
 
-const localeDateStringCache = {};
-const toLocaleDateStringFactory =
-  (locale: string) =>
-  (date: Date, dateTimeOptions: Intl.DateTimeFormatOptions) => {
-    const key = date.toString();
-    let lds = localeDateStringCache[key];
-    if (!lds) {
-      lds = date.toLocaleDateString(locale, dateTimeOptions).replace(/[/]/g, '-');
-      localeDateStringCache[key] = lds;
-    }
-    return lds;
-  };
+// const localeDateStringCache = {};
+// const toLocaleDateStringFactory =
+//   (locale: string) =>
+//   (date: Date, dateTimeOptions: Intl.DateTimeFormatOptions) => {
+//     const key = date.toString();
+//     let lds = localeDateStringCache[key];
+//     if (!lds) {
+//       lds = date.toLocaleDateString(locale, dateTimeOptions).replace(/[/]/g, '-');
+//       localeDateStringCache[key] = lds;
+//     }
+//     return lds;
+//   };
 
   const calculateTimeDifference = (startDate:any, endDate:any, unit = 'days') => {
     const diffInMs = endDate - startDate;
@@ -28,21 +28,24 @@ const toLocaleDateStringFactory =
     }
   };
 
-const dateTimeOptions: Intl.DateTimeFormatOptions = {
-  // weekday: "short",
-  // year: "numeric",
-  // month: "long",
-  // day: "numeric",
-  year: 'numeric',
-  month: '2-digit',
-  day: '2-digit',
-};
+// const dateTimeOptions: Intl.DateTimeFormatOptions = {
+//   // weekday: "short",
+//   // year: "numeric",
+//   // month: "long",
+//   // day: "numeric",
+//   year: 'numeric',
+//   month: '2-digit',
+//   day: '2-digit',
+// };
 
 export const TaskListTableDefault: React.FC<{
   rowHeight: number;
   rowWidth: string;
   taskWidth: number;
   rightSideElement:any;
+  isShown: any;
+  dateTimeStartComponent:any;
+  dateTimeEndComponent:any;
   fetchData: () => void;
   onClickTask: (task_id: string) => void;
   fontFamily: string;
@@ -57,6 +60,9 @@ export const TaskListTableDefault: React.FC<{
   rowWidth,
   taskWidth,
   rightSideElement,
+  dateTimeStartComponent,
+  dateTimeEndComponent,
+  isShown,
   fetchData,
   onClickTask,
   tasks,
@@ -65,10 +71,10 @@ export const TaskListTableDefault: React.FC<{
   locale,
   onExpanderClick,
 }) => {
-  const toLocaleDateString = useMemo(
-    () => toLocaleDateStringFactory(locale),
-    [locale]
-  );
+  // const toLocaleDateString = useMemo(
+  //   () => toLocaleDateStringFactory(locale),
+  //   [locale]
+  // );
 
   const [hoveredTasks, setHoveredTasks] = useState({});
   
@@ -90,7 +96,17 @@ export const TaskListTableDefault: React.FC<{
   };
 
   const updateTimer = (taskId:string) => {
-    const updatedElement = React.cloneElement(rightSideElement, {'taskId':taskId, 'fetchData':fetchData})
+    const updatedElement = React.cloneElement(rightSideElement, {'taskId':taskId, 'fetchData':fetchData,'locale':locale})
+    return updatedElement;
+  };
+
+  const updateStartDatePicker = (taskId:string) => {
+    const updatedElement = React.cloneElement(dateTimeStartComponent, {'taskId':taskId})
+    return updatedElement;
+  };
+
+  const updateEndDatePicker = (taskId:string) => {
+    const updatedElement = React.cloneElement(dateTimeEndComponent, {'taskId':taskId})
     return updatedElement;
   };
 
@@ -168,7 +184,8 @@ export const TaskListTableDefault: React.FC<{
                 textAlign:"center"
               }}
             >
-              &nbsp;{toLocaleDateString(t.start, dateTimeOptions)}
+              {/* &nbsp;{toLocaleDateString(t.start, dateTimeOptions)} */}
+              {updateStartDatePicker(t.id)}
             </div>
             <div
               className={styles.taskListCell}
@@ -178,9 +195,10 @@ export const TaskListTableDefault: React.FC<{
                 textAlign:"center"
               }}
             >
-              &nbsp;{toLocaleDateString(t.end, dateTimeOptions)}
+              {/* &nbsp;{toLocaleDateString(t.end, dateTimeOptions)} */}
+              {updateEndDatePicker(t.id)}
             </div>
-            <div
+            {isShown?.duration&&<div
               className={styles.taskListCell}
               style={{
                 minWidth: rowWidth,
@@ -188,8 +206,20 @@ export const TaskListTableDefault: React.FC<{
                 textAlign:"center"
               }}
             >
-              &nbsp;{calculateTimeDifference(t.start, t.end)}
-            </div>
+              &nbsp;{!expanderSymbol && calculateTimeDifference(t.start, t.end)}
+            </div>}
+            {isShown?.progress&&<div
+              className={styles.taskListCell}
+              style={{
+                minWidth: rowWidth,
+                maxWidth: rowWidth,
+                textAlign:"center"
+              }}
+            >
+              {!expanderSymbol && <div style={{width: '80%',height:'50%',border:'1px solid #eee'}}>
+                  <div style={{height:'100%', backgroundColor:'#ccc', width:`${(t.progress>0)?t.progress:'0'}%`}}>&nbsp;{(t.progress>0)?t.progress:'0'}%</div>
+              </div>}
+            </div>}
           </div>
         );
       })}
