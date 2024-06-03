@@ -216,8 +216,10 @@ export const TaskListTableDefault: React.FC<{
                 textAlign:"center"
               }}
             >
-              {!expanderSymbol && <div style={{width: '80%',height:'50%',border:'1px solid #eee'}}>
-                  <div style={{height:'100%', backgroundColor:'#ccc', width:`${(t.progress>0)?t.progress:'0'}%`}}>&nbsp;{(t.progress>0)?t.progress:'0'}%</div>
+              {!expanderSymbol && <div style={{position:'relative', width: '80%',height:'50%',border:'1px solid #228b22'}}>
+                  <div style={{height:'100%', backgroundColor:'#228b22', width:`${(t.progress>0)?t.progress:'0'}%`}}>&nbsp;</div>
+                  {t.progress < 60 &&<div style={{position:'absolute', top:'0px', left:'0px', width:'100%', color:'#000000',textAlign:'right'}}>{(t.progress>0)?t.progress:'0'}%</div>}
+                  {t.progress >= 60 &&<div style={{position:'absolute', top:'0px', left:'0px', width:'100%', color:'#ffffff'}}>{(t.progress>0)?t.progress:'0'}%</div>}
               </div>}
             </div>}
           </div>
