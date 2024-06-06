@@ -16,6 +16,8 @@ export interface Task {
   name: string;
   start: Date;
   end: Date;
+  estimated_cost: string;
+  actual_cost: string;
   /**
    * From 0 to 100
    */

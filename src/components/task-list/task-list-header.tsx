@@ -96,6 +96,24 @@ export const TaskListHeaderDefault: React.FC<{
         >
           Progress
         </div>}
+        {isShown?.estimatedCost&&<div
+          className={styles.ganttTable_HeaderItem}
+          style={{
+            minWidth: rowWidth,
+            textAlign:'center'
+          }}
+        >
+          Estimated Cost
+        </div>}
+        {isShown?.actualCost&&<div
+          className={styles.ganttTable_HeaderItem}
+          style={{
+            minWidth: rowWidth,
+            textAlign:'center'
+          }}
+        >
+          Actual Cost
+        </div>}
       </div>
     </div>
   );

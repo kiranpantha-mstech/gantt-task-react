@@ -216,12 +216,28 @@ export const TaskListTableDefault: React.FC<{
                 textAlign:"center"
               }}
             >
-              {!expanderSymbol && <div style={{position:'relative', width: '80%',height:'50%',border:'1px solid #228b22'}}>
+              {!expanderSymbol && <div style={{position:'relative', width: '80%',height:'18px', fontSize:'10px',border:'1px solid #228b22'}}>
                   <div style={{height:'100%', backgroundColor:'#228b22', width:`${(t.progress>0)?t.progress:'0'}%`}}>&nbsp;</div>
-                  {t.progress < 60 &&<div style={{position:'absolute', top:'0px', left:'0px', width:'100%', color:'#000000',textAlign:'right'}}>{(t.progress>0)?t.progress:'0'}%</div>}
-                  {t.progress >= 60 &&<div style={{position:'absolute', top:'0px', left:'0px', width:'100%', color:'#ffffff'}}>{(t.progress>0)?t.progress:'0'}%</div>}
+                  {t.progress < 60 &&<div style={{position:'absolute', top:'0px', left:'0px', width:'100%', color:'#000000',textAlign:'right', paddingRight:3, paddingLeft:3}}>{(t.progress>0)?t.progress:'0'}%</div>}
+                  {t.progress >= 60 &&<div style={{position:'absolute', top:'0px', left:'0px', width:'100%', color:'#ffffff',textAlign:'left', paddingRight:3, paddingLeft:3}}>{(t.progress>0)?t.progress:'0'}%</div>}
               </div>}
             </div>}
+            {isShown?.estimatedCost&&<div
+              className={styles.taskListCell}
+              style={{
+                minWidth: rowWidth,
+                maxWidth: rowWidth,
+                textAlign:"right"
+              }}
+            >{t?.estimated_cost}</div>}
+            {isShown?.actualCost&&<div
+              className={styles.taskListCell}
+              style={{
+                minWidth: rowWidth,
+                maxWidth: rowWidth,
+                textAlign:"right"
+              }}
+            >{t?.actual_cost}</div>}
           </div>
         );
       })}
