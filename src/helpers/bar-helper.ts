@@ -160,11 +160,11 @@ const convertToBar = (
   let x1: number;
   let x2: number;
   if (rtl) {
-    x2 = taskXCoordinateRTL(task.start, dates, columnWidth);
+    x2 = taskXCoordinateRTL(task.start, dates, taskWidth);
     x1 = taskXCoordinateRTL(task.end, dates, taskWidth);
   } else {
     x1 = taskXCoordinate(task.start, dates, taskWidth);
-    x2 = taskXCoordinate(task.end, dates, columnWidth);
+    x2 = taskXCoordinate(task.end, dates, taskWidth);
   }
   let typeInternal: TaskTypeInternal = task.type;
   if (typeInternal === "task" && x2 - x1 < handleWidth * 2) {
